@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f5f6f8;
+  --surface: #ffffff;
+  --surface-muted: #edf1f5;
+  --foreground: #102033;
+  --foreground-soft: #526274;
+  --border: #d8e0e8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Inter", "Segoe UI", sans-serif;
+  --font-mono: "SFMono-Regular", "Consolas", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.starter-shell {
+  width: min(960px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0 4rem;
+}
+
+.starter-stack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.starter-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 12px 30px rgba(16, 32, 51, 0.06);
+}
+
+.starter-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--foreground-soft);
+}
+
+.starter-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+  font-weight: 650;
+}
+
+.starter-subtle {
+  color: var(--foreground-soft);
+}
+
+.starter-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.starter-code {
+  font-family: var(--font-mono);
+  background: var(--surface-muted);
+  border-radius: 0.5rem;
+  padding: 0.15rem 0.4rem;
+}
+
+.starter-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.starter-section {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+.starter-field {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.9rem 1rem;
+  background: var(--surface);
+}
+
+.starter-field pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.starter-kv {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.starter-kv dt {
+  font-size: 0.75rem;
+  color: var(--foreground-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.starter-kv dd {
+  margin: 0;
+}
+
+.starter-link {
+  color: #0a5bd6;
+}
+
+.starter-divider {
+  height: 1px;
+  background: var(--border);
+  border: 0;
+}
