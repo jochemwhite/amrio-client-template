@@ -5,6 +5,7 @@ import { env } from "@/lib/env";
 import type {
   ApiResponse,
   CmsCollectionEntryContent,
+  CmsDefaultLayoutsData,
   CmsFullPageData,
   CmsPageContent,
   CmsPageSummary,
@@ -58,10 +59,15 @@ export async function getCollectionEntry(prefixSlug: string, entrySlug: string) 
   );
 }
 
+export async function getDefaultLayouts() {
+  return requestCms<CmsDefaultLayoutsData>(withWebsite("/default-layouts"));
+}
+
 export const getPagesCached = cache(getPages);
 export const getPageByIdCached = cache(getPageById);
 export const getPageBySlugCached = cache(getPageBySlug);
 export const getFullPageBySlugCached = cache(getFullPageBySlug);
 export const getCollectionEntryCached = cache(getCollectionEntry);
+export const getDefaultLayoutsCached = cache(getDefaultLayouts);
 
 export { CmsApiError } from "@/lib/api";

@@ -21,17 +21,25 @@ export type CmsContentField = {
 export type CmsContentSection = {
   id: string;
   name: string;
+  type: string;
   order: number | null;
   fields: CmsContentField[];
 };
 
 export type CmsLayoutData = {
+  entries?: CmsLayoutEntry[];
   overrides: unknown[];
 };
 
 export type CmsFullPageSection = CmsContentSection & {
   collectionEntry?: unknown | null;
   collection?: unknown | null;
+};
+
+export type CmsLayoutEntry = {
+  id: string;
+  name: string;
+  sections: CmsContentSection[];
 };
 
 export type CmsPageContent = {
@@ -42,6 +50,10 @@ export type CmsPageContent = {
 export type CmsFullPageData = {
   page: CmsPageSummary;
   sections: CmsFullPageSection[];
+  layout: CmsLayoutData;
+};
+
+export type CmsDefaultLayoutsData = {
   layout: CmsLayoutData;
 };
 
