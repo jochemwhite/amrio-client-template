@@ -13,7 +13,7 @@ function renderSpan(span: RichTextSpan, index: number) {
 
   if (span.marks?.code) {
     child = (
-      <code className="rounded bg-[var(--color-surface-muted)] px-1.5 py-0.5 font-mono text-sm text-[var(--color-foreground)]">
+      <code className="rounded bg-surface-muted px-1.5 py-0.5 font-mono text-sm text-current">
         {child}
       </code>
     );
@@ -34,7 +34,7 @@ function renderSpan(span: RichTextSpan, index: number) {
   if (span.href) {
     child = (
       <ContentLink
-        className="text-[var(--color-secondary)] transition-colors hover:text-[var(--color-secondary-strong)]"
+        className="text-secondary transition-colors hover:text-secondary-strong"
         href={span.href}
       >
         {child}
@@ -60,7 +60,7 @@ function renderBlock(block: RichTextBlock, index: number) {
       const Tag = `h${level}` as ElementType;
 
       return (
-        <Tag key={`block-${index}`} className="text-xl font-semibold leading-tight">
+        <Tag key={`block-${index}`} className="text-xl font-semibold leading-tight text-current">
           {renderInline(block.spans)}
         </Tag>
       );
@@ -69,7 +69,7 @@ function renderBlock(block: RichTextBlock, index: number) {
       return (
         <blockquote
           key={`block-${index}`}
-          className="border-l-[3px] border-[var(--color-border)] pl-4 text-[var(--color-text-muted)]"
+          className="border-l-[3px] border-border pl-4 text-muted"
         >
           {renderInline(block.spans)}
         </blockquote>
@@ -87,7 +87,7 @@ function renderBlock(block: RichTextBlock, index: number) {
     }
     default:
       return (
-        <p key={`block-${index}`} className="text-base leading-7 text-[var(--color-foreground)]">
+        <p key={`block-${index}`} className="text-base leading-7 text-current">
           {renderInline(block.spans)}
         </p>
       );
@@ -110,7 +110,7 @@ export function RichTextField({ field }: { field: RichTextContentField }) {
   if (typeof content.plainText === "string" && content.plainText.trim()) {
     return (
       <div className="grid gap-4">
-        <p className="text-base leading-7 text-[var(--color-foreground)]">
+        <p className="text-base leading-7 text-current">
           {content.plainText}
         </p>
       </div>
@@ -120,12 +120,12 @@ export function RichTextField({ field }: { field: RichTextContentField }) {
   if (typeof content.html === "string" && content.html.trim()) {
     return (
       <div className="grid gap-4">
-        <p className="text-sm text-[var(--color-text-muted)]">
+        <p className="text-sm text-muted">
           HTML content received. Swap in your preferred rich text renderer here.
         </p>
       </div>
     );
   }
 
-  return <p className="text-sm text-[var(--color-text-muted)]">No rich text content provided.</p>;
+  return <p className="text-sm text-muted">No rich text content provided.</p>;
 }

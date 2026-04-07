@@ -17,18 +17,18 @@ export function SectionField({
   const children = sortByOrder(content.children ?? []);
 
   return (
-    <section className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-4">
+    <section className="rounded-xl border border-border bg-surface-muted p-4">
       <div className="grid gap-3">
         {content.title ? (
-          <h3 className="text-lg font-semibold text-[var(--color-foreground)]">
+          <h3 className="text-lg font-semibold text-foreground">
             {content.title}
           </h3>
         ) : null}
         {content.description ? (
-          <p className="text-[var(--color-text-muted)]">{content.description}</p>
+          <p className="text-muted">{content.description}</p>
         ) : null}
         {children.length === 0 ? (
-          <p className="text-sm text-[var(--color-text-muted)]">This section has no child fields yet.</p>
+          <p className="text-sm text-muted">This section has no child fields yet.</p>
         ) : (
           <div
             className={

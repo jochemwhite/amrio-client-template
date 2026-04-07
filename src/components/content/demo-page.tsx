@@ -9,9 +9,9 @@ const shellClass =
   "mx-auto w-[min(960px,calc(100%-1rem))] py-6 md:w-[min(960px,calc(100%-2rem))] md:py-12";
 const stackClass = "grid gap-6";
 const cardClass =
-  "rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_12px_30px_rgba(16,32,51,0.06)]";
+  "rounded-2xl border border-border bg-surface p-6 shadow-[var(--shadow-elevated)]";
 const eyebrowClass =
-  "inline-block text-xs leading-none font-medium tracking-[0.08em] text-slate-500 uppercase";
+  "inline-block text-xs leading-none font-medium tracking-[0.08em] text-subtle uppercase";
 
 export function ContentTemplateDemo() {
   return (
@@ -22,7 +22,7 @@ export function ContentTemplateDemo() {
           <h1 className="mt-3 text-[clamp(2rem,4vw,3rem)] leading-[1.05] font-semibold tracking-tight">
             Cloneable CMS field renderer starter
           </h1>
-          <p className="mt-3 text-slate-600">
+          <p className="mt-3 text-muted">
             The defaults are intentionally quiet. Clone this repo, change the
             tokens and component classes, then keep the rendering structure.
           </p>
@@ -36,7 +36,7 @@ export function ContentTemplateDemo() {
                 {CONTENT_FIELD_TYPES.map((type) => (
                   <article
                     key={type}
-                    className="rounded-xl border border-slate-200 bg-white px-4 py-3"
+                    className="rounded-xl border border-border bg-surface px-4 py-3"
                   >
                     <strong>{type}</strong>
                   </article>
@@ -50,7 +50,7 @@ export function ContentTemplateDemo() {
           <div className={stackClass}>
             <div>
               <p className={eyebrowClass}>Example renderer</p>
-              <p className="mt-2 text-slate-600">
+              <p className="mt-2 text-muted">
                 This loops over representative sample content and renders every
                 registered field component, including recursive sections and an
                 unsupported-type fallback.
@@ -64,7 +64,7 @@ export function ContentTemplateDemo() {
           <div className={stackClass}>
             <div>
               <p className={eyebrowClass}>Empty states</p>
-              <p className="mt-2 text-slate-600">
+              <p className="mt-2 text-muted">
                 Each component exposes minimal fallback UI so content gaps stay
                 obvious during integration.
               </p>

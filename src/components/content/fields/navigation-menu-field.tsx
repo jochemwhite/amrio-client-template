@@ -16,20 +16,20 @@ function NavigationItems({
       className={`list-none ${
         depth === 0
           ? "grid gap-3 p-0"
-          : "mt-2 grid gap-2 border-l border-[var(--color-border)] pl-4"
+          : "mt-2 grid gap-2 border-l border-border pl-4"
       }`}
     >
       {items.map((item) => (
         <li key={item.id} className="grid gap-1">
           {item.href ? (
             <ContentLink
-              className="text-[var(--color-secondary)] transition-colors hover:text-[var(--color-secondary-strong)]"
+              className="text-secondary transition-colors hover:text-secondary-strong"
               href={item.href}
             >
               {item.label}
             </ContentLink>
           ) : (
-            <span className="font-semibold text-[var(--color-foreground)]">
+            <span className="font-semibold text-foreground">
               {item.label}
             </span>
           )}
@@ -51,13 +51,13 @@ export function NavigationMenuField({
   const items = content.items ?? [];
 
   if (items.length === 0) {
-    return <p className="text-sm text-[var(--color-text-muted)]">No navigation items provided.</p>;
+    return <p className="text-sm text-muted">No navigation items provided.</p>;
   }
 
   return (
     <nav className="grid gap-3" aria-label={content.title ?? "Navigation"}>
       {content.title ? (
-        <p className="text-lg font-semibold text-[var(--color-foreground)]">
+        <p className="text-lg font-semibold text-foreground">
           {content.title}
         </p>
       ) : null}

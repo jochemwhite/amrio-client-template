@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, unstable_rethrow } from "next/navigation";
 
+import { CmsOutageState } from "@/components/app/route-status";
 import { CmsPageView } from "@/components/cms/content-renderer";
 import {
   CmsApiError,
@@ -15,8 +16,7 @@ type CmsPageProps = {
   }>;
 };
 
-// export const revalidate = 60;
-// export const dynamicParams = true;
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   const pages = await getPagesCached();
@@ -47,18 +47,37 @@ export async function generateMetadata({
 }: CmsPageProps): Promise<Metadata> {
   const { slug } = await params;
   const slugSegments = slug ?? [];
-  const page = await loadCmsPage(slugSegments);
 
-  return {
-    title: page.page.name,
-    description: `CMS page for ${page.page.name}`,
-  };
+  try {
+    const page = await loadCmsPage(slugSegments);
+
+    return {
+      title: page.page.name,
+      description: `CMS page for ${page.page.name}`,
+    };
+  } catch {
+    return {
+      title: "CMS content unavailable",
+      description: "The CMS content for this page is temporarily unavailable.",
+    };
+  }
 }
 
 export default async function CmsPageRoute({ params }: CmsPageProps) {
   const { slug } = await params;
   const slugSegments = slug ?? [];
-  const page = await loadCmsPage(slugSegments);
+  let page;
+
+  try {
+    page = await loadCmsPage(slugSegments);
+  } catch (error) {
+    unstable_rethrow(error);
+    console.error("Failed to load CMS page content.", error);
+
+    return (
+      <CmsOutageState description="The CMS did not return this page right now. Try refreshing shortly, or revalidate the route after the CMS update finishes." />
+    );
+  }
 
   return <CmsPageView page={page} />;
 }

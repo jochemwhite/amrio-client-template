@@ -7,7 +7,7 @@ export function ImageField({ field }: { field: ImageContentField }) {
   if (!content.src) {
     return (
       <figure className="grid gap-3">
-        <div className="grid min-h-48 place-items-center rounded-xl border border-dashed border-[var(--color-border)] bg-[var(--color-surface-muted)] text-[var(--color-text-muted)]">
+        <div className="grid min-h-48 place-items-center rounded-xl border border-dashed border-border bg-surface-muted text-muted">
           Image unavailable
         </div>
       </figure>
@@ -17,7 +17,7 @@ export function ImageField({ field }: { field: ImageContentField }) {
   return (
     <figure className="grid gap-3">
       <div
-        className="relative overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-muted)]"
+        className="relative overflow-hidden rounded-xl border border-border bg-surface-muted"
         style={
           content.aspectRatio ? { aspectRatio: content.aspectRatio } : undefined
         }
@@ -34,7 +34,7 @@ export function ImageField({ field }: { field: ImageContentField }) {
         />
       </div>
       {content.caption ? (
-        <figcaption className="text-sm text-[var(--color-text-muted)]">
+        <figcaption className="text-sm text-muted">
           {content.caption}
         </figcaption>
       ) : null}

@@ -12,18 +12,18 @@ export function HeroSection({ section }: CmsSectionComponentProps) {
 
   return (
     <section
-      className="overflow-hidden rounded-4xl border border-[var(--color-border)] px-6 py-8 md:px-10 md:py-12"
+      className="overflow-hidden rounded-4xl border border-border px-6 py-8 md:px-10 md:py-12"
       data-section-type={section.type}
       style={
         backgroundImage?.content.src
           ? {
-              backgroundImage: `linear-gradient(135deg, rgba(248,250,252,0.88) 0%, rgba(224,242,254,0.82) 45%, rgba(254,243,199,0.78) 100%), url(${backgroundImage.content.src})`,
+              backgroundImage: `linear-gradient(135deg, var(--hero-overlay-start) 0%, var(--hero-overlay-middle) 45%, var(--hero-overlay-end) 100%), url(${backgroundImage.content.src})`,
               backgroundPosition: "center",
               backgroundSize: "cover",
             }
           : {
               background:
-                "linear-gradient(135deg, var(--color-surface) 0%, var(--color-secondary-soft) 45%, var(--color-accent-soft) 100%)",
+                "linear-gradient(135deg, var(--surface) 0%, var(--secondary-soft) 45%, var(--accent-soft) 100%)",
             }
       }
     >

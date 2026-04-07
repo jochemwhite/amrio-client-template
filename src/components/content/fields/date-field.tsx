@@ -5,12 +5,12 @@ export function DateField({ field }: { field: DateContentField }) {
   const formatted = formatDateContent(field.content);
 
   if (!formatted) {
-    return <p className="text-sm text-[var(--color-text-muted)]">No date available.</p>;
+    return <p className="text-sm text-muted">No date available.</p>;
   }
 
   return (
     <time
-      className="text-base leading-7 text-[var(--color-foreground)]"
+      className="text-base leading-7 text-foreground"
       dateTime={field.content.value ?? undefined}
     >
       {formatted}

@@ -5,7 +5,7 @@ export function VideoField({ field }: { field: VideoContentField }) {
 
   if (!content.embedUrl && !content.src) {
     return (
-      <div className="grid min-h-48 place-items-center rounded-xl border border-dashed border-[var(--color-border)] bg-[var(--color-surface-muted)] text-[var(--color-text-muted)]">
+      <div className="grid min-h-48 place-items-center rounded-xl border border-dashed border-border bg-surface-muted text-muted">
         Video unavailable
       </div>
     );
@@ -14,7 +14,7 @@ export function VideoField({ field }: { field: VideoContentField }) {
   return (
     <figure className="grid gap-3">
       <div
-        className="overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-muted)]"
+        className="overflow-hidden rounded-xl border border-border bg-surface-muted"
         style={
           content.aspectRatio ? { aspectRatio: content.aspectRatio } : undefined
         }
@@ -37,7 +37,7 @@ export function VideoField({ field }: { field: VideoContentField }) {
         )}
       </div>
       {content.caption ? (
-        <figcaption className="text-sm text-[var(--color-text-muted)]">
+        <figcaption className="text-sm text-muted">
           {content.caption}
         </figcaption>
       ) : null}

@@ -1,3 +1,4 @@
+import { CmsEmptyState } from "@/components/app/route-status";
 import { renderCmsSection } from "@/components/cms/section-registry";
 import { sortByOrder } from "@/components/content/utils";
 import type { CmsFullPageData } from "@/types/cms";
@@ -11,7 +12,7 @@ export function CmsPageView({ page }: { page: CmsFullPageData }) {
     <section>
       <div className={stackClass}>
         {sections.length === 0 ? (
-          <p className="text-[var(--color-text-muted)]">This page currently has no sections.</p>
+          <CmsEmptyState />
         ) : (
           sections.map((section) => <div key={section.id}>{renderCmsSection(section)}</div>)
         )}

@@ -8,19 +8,19 @@ export function UnsupportedField({
 }) {
   return (
     <div className="grid gap-3">
-      <p className="text-sm text-slate-600">
+      <p className="text-sm text-muted">
         No renderer is registered for{" "}
-        <span className="rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-sm">
+        <span className="rounded-md bg-surface-muted px-1.5 py-0.5 font-mono text-sm">
           {field.type}
         </span>
         .
       </p>
       <dl className="grid gap-1">
-        <dt className="text-xs tracking-[0.08em] text-slate-500 uppercase">
+        <dt className="text-xs tracking-[0.08em] text-subtle uppercase">
           Label
         </dt>
         <dd>{getFieldLabel(field)}</dd>
-        <dt className="text-xs tracking-[0.08em] text-slate-500 uppercase">
+        <dt className="text-xs tracking-[0.08em] text-subtle uppercase">
           Content
         </dt>
         <dd>

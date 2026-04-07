@@ -1,5 +1,3 @@
-import axios, { AxiosError } from "axios";
-
 import { env } from "@/lib/env";
 
 export class CmsApiError extends Error {
@@ -14,30 +12,49 @@ export class CmsApiError extends Error {
   }
 }
 
-export const api = axios.create({
-  baseURL: env.CMS_API_URL,
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${env.CMS_API_KEY}`,
-  },
-  timeout: 10000,
-});
+type RequestCmsOptions = {
+  revalidate?: number;
+  tags?: string[];
+};
 
-api.interceptors.response.use(
-  (response) => response,
-  (error: AxiosError<{ message?: string }>) => {
-    const status = error.response?.status;
+export async function requestCmsApi<T>(
+  path: string,
+  options?: RequestCmsOptions,
+) {
+  const response = await fetch(`${env.CMS_API_URL}${path}`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${env.CMS_API_KEY}`,
+    },
+    next: {
+      revalidate: options?.revalidate,
+      tags: options?.tags,
+    },
+  });
+
+  let payload: T | { message?: string } | null = null;
+
+  try {
+    payload = (await response.json()) as T | { message?: string };
+  } catch {
+    payload = null;
+  }
+
+  if (!response.ok) {
     const message =
-      error.response?.data?.message ??
-      error.message ??
-      "The CMS request failed.";
+      payload &&
+      typeof payload === "object" &&
+      "message" in payload &&
+      typeof payload.message === "string"
+        ? payload.message
+        : `The CMS request failed for "${path}".`;
 
-    return Promise.reject(
-      new CmsApiError(message, {
-        status,
-        cause: error,
-      }),
-    );
-  },
-);
+    throw new CmsApiError(message, {
+      status: response.status,
+      cause: payload,
+    });
+  }
+
+  return payload as T;
+}

@@ -18,7 +18,7 @@ function FooterAction({ field }: { field?: ButtonContentField }) {
 
   return (
     <ContentLink
-      className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-900 transition-colors hover:bg-slate-900 hover:text-white"
+      className="inline-flex min-h-11 items-center justify-center rounded-full border border-footer-foreground/20 px-4 py-3 text-sm font-semibold text-footer-foreground transition-colors hover:bg-footer-foreground hover:text-footer"
       href={href}
       target={field?.content.target}
     >
@@ -35,14 +35,8 @@ export function CmsFooter({ entry }: { entry: CmsLayoutEntry }) {
   const middle = sections.find(
     (section) => section.name.trim().toLowerCase() === "middle",
   );
-  const bottom = sections.find(
-    (section) => section.name.trim().toLowerCase() === "bottom",
-  );
-
   const topFields = top ? getRenderableFields(top) : [];
   const middleFields = middle ? getRenderableFields(middle) : [];
-  const bottomFields = bottom ? getRenderableFields(bottom) : [];
-
   const footerLogo = getFieldByKey(topFields, "footer_logo", "image");
   const footerTitle = getFieldByKey(middleFields, "title", "text");
   const footerAbout = getFieldByKey(middleFields, "about", "richtext");
@@ -51,7 +45,10 @@ export function CmsFooter({ entry }: { entry: CmsLayoutEntry }) {
   const currentyear = new Date().getFullYear();
 
   return (
-    <footer className="mt-16 border-t" data-layout-entry={entry.name}>
+    <footer
+      className="mt-16 border-t border-footer-border bg-footer text-footer-foreground"
+      data-layout-entry={entry.name}
+    >
       <div className="container mx-auto grid gap-10 px-4 py-12 md:grid-cols-[auto_minmax(0,1fr)] md:items-start">
         <div className="flex items-start">
           {footerLogo?.content.src ? (
@@ -73,7 +70,7 @@ export function CmsFooter({ entry }: { entry: CmsLayoutEntry }) {
           ) : null}
 
           {footerAbout ? (
-            <div className="max-w-3xl text-slate-300">
+            <div className="max-w-3xl text-footer-foreground [&_a]:text-footer-foreground [&_a:hover]:text-primary-soft [&_blockquote]:border-footer-muted/40 [&_blockquote]:text-footer-muted [&_code]:bg-footer-foreground/10 [&_p]:text-inherit">
               <RichTextField field={footerAbout} />
             </div>
           ) : null}
@@ -82,10 +79,16 @@ export function CmsFooter({ entry }: { entry: CmsLayoutEntry }) {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="container mx-auto flex flex-col gap-2 px-4 py-5 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
+      <div className="border-t border-footer-border">
+        <div className="container mx-auto flex flex-col gap-2 px-4 py-5 text-sm text-footer-muted md:flex-row md:items-center md:justify-between">
           <p>© {currentyear} Amrio. All rights reserved.</p>
-          <Link href="https://amrio.nl">Gemaakt door Amrio</Link>
+          <Link
+            className="transition-colors hover:text-footer-foreground"
+            href="https://amrio.nl"
+            target="_blank"
+          >
+            Gemaakt door Amrio
+          </Link>
         </div>
       </div>
     </footer>

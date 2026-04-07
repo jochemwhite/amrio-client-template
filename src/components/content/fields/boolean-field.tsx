@@ -6,13 +6,13 @@ export function BooleanField({ field }: { field: BooleanContentField }) {
   const presentation = content.presentation ?? "badge";
 
   if (value == null) {
-    return <p className="text-sm text-[var(--color-text-muted)]">No boolean value set.</p>;
+    return <p className="text-sm text-muted">No boolean value set.</p>;
   }
 
   const label = value ? content.trueLabel ?? "Yes" : content.falseLabel ?? "No";
 
   if (presentation === "text") {
-    return <p className="text-base leading-7 text-[var(--color-foreground)]">{label}</p>;
+    return <p className="text-base leading-7 text-foreground">{label}</p>;
   }
 
   if (presentation === "toggle") {
@@ -21,17 +21,17 @@ export function BooleanField({ field }: { field: BooleanContentField }) {
         <span
           className={`flex h-6 w-11 items-center rounded-full border p-0.5 ${
             value
-              ? "border-[var(--color-primary)] bg-[var(--color-primary-soft)]"
-              : "border-[var(--color-border)] bg-[var(--color-surface-muted)]"
+              ? "border-primary bg-primary-soft"
+              : "border-border bg-surface-muted"
           }`}
         >
           <span
-            className={`h-4 w-4 rounded-full bg-[var(--color-surface)] shadow-sm transition-transform ${
+            className={`h-4 w-4 rounded-full bg-surface shadow-sm transition-transform ${
               value ? "translate-x-5" : "translate-x-0"
             }`}
           />
         </span>
-        <span className="text-[var(--color-text-muted)]">{label}</span>
+        <span className="text-muted">{label}</span>
       </div>
     );
   }
@@ -40,8 +40,8 @@ export function BooleanField({ field }: { field: BooleanContentField }) {
     <span
       className={`inline-flex items-center rounded-full border px-3 py-1 text-sm font-semibold ${
         value
-          ? "border-[var(--color-success)] bg-[color-mix(in_oklab,var(--color-success)_15%,white)] text-[var(--color-success)]"
-          : "border-[var(--color-border)] bg-[var(--color-surface-muted)] text-[var(--color-text-muted)]"
+          ? "border-success bg-success/15 text-success"
+          : "border-border bg-surface-muted text-muted"
       }`}
     >
       {label}

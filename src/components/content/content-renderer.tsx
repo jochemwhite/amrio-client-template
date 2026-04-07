@@ -24,16 +24,16 @@ export function renderContentField(
       key={field.id}
       className={
         showFieldMeta
-          ? "overflow-hidden rounded-2xl border border-slate-200 bg-white"
+          ? "overflow-hidden rounded-2xl border border-border bg-surface"
           : "bg-transparent"
       }
       data-field-type={field.type}
       data-field-depth={depth}
     >
       {showFieldMeta ? (
-        <header className="flex items-center justify-between gap-4 border-b border-slate-200 bg-slate-50/80 px-4 py-3">
+        <header className="flex items-center justify-between gap-4 border-b border-border bg-surface-muted/80 px-4 py-3">
           <p className="text-sm font-semibold">{getFieldLabel(field)}</p>
-          <p className="text-xs tracking-[0.08em] text-slate-500 uppercase">
+          <p className="text-xs tracking-[0.08em] text-subtle uppercase">
             {field.type}
           </p>
         </header>
@@ -74,7 +74,7 @@ export function ContentFieldsRenderer({
   const orderedFields = sortByOrder(fields);
 
   if (orderedFields.length === 0) {
-    return <p className="text-sm text-slate-600">{emptyLabel}</p>;
+    return <p className="text-sm text-muted">{emptyLabel}</p>;
   }
 
   return (

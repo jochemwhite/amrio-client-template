@@ -13,7 +13,7 @@ export function ReferenceField({ field }: { field: ReferenceContentField }) {
         {items.map((item) => (
           <article
             key={item.id}
-            className="grid items-start gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 md:grid-cols-[72px_1fr]"
+            className="grid items-start gap-4 rounded-xl border border-border bg-surface p-4 md:grid-cols-[72px_1fr]"
           >
             {item.thumbnailSrc ? (
               <ContentImage
@@ -27,21 +27,21 @@ export function ReferenceField({ field }: { field: ReferenceContentField }) {
             <div className="grid gap-3">
               {item.href ? (
                 <ContentLink
-                  className="text-lg font-semibold text-[var(--color-secondary)] transition-colors hover:text-[var(--color-secondary-strong)]"
+                  className="text-lg font-semibold text-secondary transition-colors hover:text-secondary-strong"
                   href={item.href}
                 >
                   {item.title ?? "Untitled reference"}
                 </ContentLink>
               ) : (
-                <h3 className="text-lg font-semibold text-[var(--color-foreground)]">
+                <h3 className="text-lg font-semibold text-foreground">
                   {item.title ?? "Untitled reference"}
                 </h3>
               )}
               {item.meta ? (
-                <p className="text-sm text-[var(--color-text-subtle)]">{item.meta}</p>
+                <p className="text-sm text-subtle">{item.meta}</p>
               ) : null}
               {item.description ? (
-                <p className="text-[var(--color-text-muted)]">{item.description}</p>
+                <p className="text-muted">{item.description}</p>
               ) : null}
             </div>
           </article>
@@ -51,11 +51,11 @@ export function ReferenceField({ field }: { field: ReferenceContentField }) {
   }
 
   if (!title && !content.description) {
-    return <p className="text-sm text-[var(--color-text-muted)]">No reference content available.</p>;
+    return <p className="text-sm text-muted">No reference content available.</p>;
   }
 
   const body = (
-    <article className="grid items-start gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 md:grid-cols-[72px_1fr]">
+    <article className="grid items-start gap-4 rounded-xl border border-border bg-surface p-4 md:grid-cols-[72px_1fr]">
       {content.thumbnailSrc ? (
         <ContentImage
           alt=""
@@ -67,15 +67,15 @@ export function ReferenceField({ field }: { field: ReferenceContentField }) {
       ) : null}
       <div className="grid gap-3">
         {title ? (
-          <h3 className="text-lg font-semibold text-[var(--color-foreground)]">
+          <h3 className="text-lg font-semibold text-foreground">
             {title}
           </h3>
         ) : null}
         {content.meta ? (
-          <p className="text-sm text-[var(--color-text-subtle)]">{content.meta}</p>
+          <p className="text-sm text-subtle">{content.meta}</p>
         ) : null}
         {content.description ? (
-          <p className="text-[var(--color-text-muted)]">{content.description}</p>
+          <p className="text-muted">{content.description}</p>
         ) : null}
       </div>
     </article>
@@ -84,7 +84,7 @@ export function ReferenceField({ field }: { field: ReferenceContentField }) {
   if (content.href) {
     return (
       <ContentLink
-        className="block text-[var(--color-secondary)] transition-colors hover:text-[var(--color-secondary-strong)]"
+        className="block text-secondary transition-colors hover:text-secondary-strong"
         href={content.href}
       >
         {body}

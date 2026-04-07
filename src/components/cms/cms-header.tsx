@@ -2,7 +2,6 @@ import { ContentImage } from "@/components/content/content-image";
 import { ContentLink } from "@/components/content/content-link";
 import { getFieldByKey, sortByOrder } from "@/components/content/utils";
 import type { CmsLayoutEntry } from "@/types/cms";
-
 import { getRenderableFields, normalizeHref } from "./layout-shared";
 
 export function CmsHeader({ entry }: { entry: CmsLayoutEntry }) {
@@ -20,7 +19,7 @@ export function CmsHeader({ entry }: { entry: CmsLayoutEntry }) {
 
   return (
     <header
-      className="border-b border-slate-200 bg-white/95 backdrop-blur top-0 sticky z-50"
+      className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur"
       data-layout-entry={entry.name}
     >
       <div className="container mx-auto flex flex-col gap-6 px-4 py-4 md:flex-row md:items-center md:justify-between">
@@ -34,7 +33,7 @@ export function CmsHeader({ entry }: { entry: CmsLayoutEntry }) {
               width={44}
             />
           ) : null}
-          <span className="text-lg font-semibold tracking-tight text-slate-950">
+          <span className="text-lg font-semibold tracking-tight text-foreground">
             {title?.content.text ?? entry.name}
           </span>
         </ContentLink>
@@ -48,7 +47,7 @@ export function CmsHeader({ entry }: { entry: CmsLayoutEntry }) {
                 return (
                   <li key={item.id}>
                     <ContentLink
-                      className="text-sm font-medium text-slate-700 transition-colors hover:text-slate-950"
+                      className="text-sm font-medium text-primary transition-colors hover:text-foreground"
                       href={href}
                     >
                       {item.label}

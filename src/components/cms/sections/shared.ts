@@ -12,8 +12,8 @@ export type CmsSectionComponent = (
 
 export const sectionStackClass = "grid gap-6";
 export const sectionEyebrowClass =
-  "inline-block text-xs leading-none font-medium tracking-[0.08em] text-slate-500 uppercase";
-export const sectionSubtleClass = "text-slate-600";
+  "inline-block text-xs leading-none font-medium tracking-[0.08em] text-subtle uppercase";
+export const sectionSubtleClass = "text-muted";
 
 export function getRenderableFields(section: CmsContentSection) {
   return sortByOrder(section.fields).map(normalizeCmsContentField);
