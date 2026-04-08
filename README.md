@@ -14,6 +14,7 @@ Reusable internal starter for CMS-driven client websites built with:
 2. Set `CMS_API_URL` to your CMS base URL.
 3. Set `WEBSITE_ID` to the website identifier for the current client.
 4. Set `CMS_API_KEY` and `REVALIDATE_SECRET`.
+5. Optionally set `UMAMI_HOST_URL` and `UMAMI_WEBSITE_ID` to enable analytics.
 4. Start the app with `bun dev`.
 
 ```env
@@ -21,6 +22,8 @@ CMS_API_URL=http://localhost:8000/api/cms
 WEBSITE_ID=your-website-id
 CMS_API_KEY=your-cms-api-key
 REVALIDATE_SECRET=your-long-random-secret
+UMAMI_HOST_URL=https://umami.amrio.nl
+UMAMI_WEBSITE_ID=your-umami-website-id
 ```
 
 ## Folder structure
@@ -118,6 +121,22 @@ Use `revalidateLayout: true` when shared header/footer content changed. Use `rev
 Use `prewarm: true` when you want the API call itself to immediately request the invalidated page and refill the cache instead of waiting for the next browser hit.
 
 The revalidation route also invalidates the shared CMS data cache tag for the current `WEBSITE_ID`, so updated CMS content is fetched fresh on the next page visit after a successful request.
+
+## Analytics
+
+Umami is supported out of the box.
+
+Set these env vars to enable it:
+
+- `UMAMI_HOST_URL`
+- `UMAMI_WEBSITE_ID`
+
+The template loads Umami with `next/script` in the root layout and proxies requests through first-party paths to reduce ad blocker interference:
+
+- Script: `/a/script.js`
+- Collection endpoint: `/a/api/send`
+
+The proxy forwards traffic to your configured Umami instance while keeping the browser-facing URLs on your own domain.
 
 ## Reusing this starter for a new client
 

@@ -15,7 +15,7 @@ export function RouteStatus({
 }: RouteStatusProps) {
   return (
     <div className="mx-auto w-[min(960px,calc(100%-1rem))] py-6 md:w-[min(960px,calc(100%-2rem))] md:py-12">
-      <div className="grid gap-6 rounded-2xl border border-border bg-surface p-6 shadow-[var(--shadow-elevated)]">
+      <div className="grid gap-6 rounded-2xl border border-border bg-surface p-6 shadow-(--shadow-elevated)">
         <div className="grid gap-3">
           <p className="inline-block text-xs leading-none font-medium tracking-[0.08em] text-subtle uppercase">
             {eyebrow}

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { UmamiScript } from "@/components/analytics/umami-script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,6 +20,7 @@ export default function RootLayout({
     <html lang="en" className="h-full antialiased">
       <body className="relative min-h-full bg-background font-sans text-foreground">
         {children}
+        <UmamiScript />
       </body>
     </html>
   );
