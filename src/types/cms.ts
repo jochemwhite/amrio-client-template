@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 export type ApiResponse<T> = {
   success: boolean;
   data: T;
@@ -8,6 +10,7 @@ export type CmsPageSummary = {
   slug: string;
   name: string;
   status: string;
+  metadata: Metadata
 };
 
 export type CmsContentField = {

@@ -51,6 +51,11 @@ export async function generateMetadata({
   try {
     const page = await loadCmsPage(slugSegments);
 
+    if(page.page.metadata){
+      return page.page.metadata
+    }
+
+
     return {
       title: page.page.name,
       description: `CMS page for ${page.page.name}`,
