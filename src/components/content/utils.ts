@@ -45,13 +45,10 @@ export function getFieldByKey<
 ): Extract<TField, { type: TType }> | undefined;
 export function getFieldByKey<
   TField extends { fieldKey?: string | null; type?: string },
->(
-  fields: TField[],
-  fieldKey: string,
-  type?: string,
-) {
+>(fields: TField[], fieldKey: string, type?: string) {
   return fields.find(
-    (field) => field.fieldKey === fieldKey && (type == null || field.type === type),
+    (field) =>
+      field.fieldKey === fieldKey && (type == null || field.type === type),
   );
 }
 

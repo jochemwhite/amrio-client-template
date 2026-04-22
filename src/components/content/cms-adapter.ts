@@ -3,6 +3,7 @@ import type {
   BooleanContentField,
   ButtonContentField,
   DateContentField,
+  FormContentField,
   ImageContentField,
   NavigationMenuContentField,
   NavigationMenuItem,
@@ -17,6 +18,7 @@ import type {
   TextContentField,
   VideoContentField,
 } from "@/types/content";
+import type { BuilderField } from "@/types/form-builder";
 import { isRecord, isRenderableField } from "@/components/content/utils";
 
 function getString(record: Record<string, unknown>, keys: string[]) {
@@ -772,6 +774,76 @@ function parseSectionContent(field: CmsContentField): SectionContentField {
   };
 }
 
+function extractFormRecord(raw: unknown): Record<string, unknown> | null {
+  if (!isRecord(raw)) return null;
+
+  // The CMS may nest the form under `form`, `data`, or `value`, or deliver it
+  // inline. Try the nested candidates first, then fall back to the root.
+  for (const key of ["form", "data", "value"] as const) {
+    const candidate = raw[key];
+    if (isRecord(candidate) && Array.isArray(candidate.content)) {
+      return candidate;
+    }
+  }
+
+  if (Array.isArray((raw as { content?: unknown }).content)) {
+    return raw;
+  }
+
+  return null;
+}
+
+function looksLikeFormContent(raw: unknown): boolean {
+  return extractFormRecord(raw) !== null;
+}
+
+function parseFormContent(field: CmsContentField): FormContentField {
+  const source = extractFormRecord(field.content) ?? {};
+
+  const content = Array.isArray(source.content)
+    ? (source.content as BuilderField[])
+    : [];
+
+  const description =
+    typeof source.description === "string" ? source.description : null;
+
+  return {
+    id: field.id,
+    type: "form",
+    fieldKey: field.field_key,
+    order: field.order,
+    content: {
+      id: typeof source.id === "string" ? source.id : field.id,
+      name:
+        (typeof source.name === "string" && source.name) ||
+        (typeof field.field_key === "string" && field.field_key) ||
+        "Form",
+      description,
+      published:
+        typeof source.published === "boolean" ? source.published : true,
+      share_url:
+        typeof source.share_url === "string"
+          ? source.share_url
+          : typeof source.shareUrl === "string"
+            ? source.shareUrl
+            : "",
+      content,
+      submitLabel:
+        typeof source.submitLabel === "string"
+          ? source.submitLabel
+          : typeof source.submit_label === "string"
+            ? source.submit_label
+            : undefined,
+      successMessage:
+        typeof source.successMessage === "string"
+          ? source.successMessage
+          : typeof source.success_message === "string"
+            ? source.success_message
+            : undefined,
+    },
+  };
+}
+
 export function normalizeCmsContentField(field: CmsContentField): RenderableContentField {
   switch (field.type) {
     case "text":
@@ -796,7 +868,16 @@ export function normalizeCmsContentField(field: CmsContentField): RenderableCont
       return parseSocialMediaContent(field);
     case "navigation_menu":
       return parseNavigationMenuContent(field);
+    case "form":
+      return parseFormContent(field);
     default:
+      // Unknown CMS block types that carry a form-shaped payload (for example
+      // when a project names its block `contact_form` or `newsletter_form`)
+      // are normalized to the `form` field so the registry renders them.
+      if (looksLikeFormContent(field.content)) {
+        return parseFormContent(field);
+      }
+
       return {
         id: field.id,
         type: field.type,

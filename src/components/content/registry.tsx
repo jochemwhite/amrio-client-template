@@ -2,8 +2,8 @@ import type {
   BooleanContentField,
   ButtonContentField,
   ContentFieldComponent,
-  ContentFieldType,
   DateContentField,
+  FormContentField,
   ImageContentField,
   NavigationMenuContentField,
   ReferenceContentField,
@@ -16,6 +16,7 @@ import type {
 import { BooleanField } from "@/components/content/fields/boolean-field";
 import { ButtonField } from "@/components/content/fields/button-field";
 import { DateField } from "@/components/content/fields/date-field";
+import { FormField } from "@/components/content/fields/form-field";
 import { ImageField } from "@/components/content/fields/image-field";
 import { NavigationMenuField } from "@/components/content/fields/navigation-menu-field";
 import { ReferenceField } from "@/components/content/fields/reference-field";
@@ -25,10 +26,7 @@ import { SocialMediaField } from "@/components/content/fields/social-media-field
 import { TextField } from "@/components/content/fields/text-field";
 import { VideoField } from "@/components/content/fields/video-field";
 
-export const contentFieldRegistry: Record<
-  ContentFieldType,
-  ContentFieldComponent
-> = {
+export const contentFieldRegistry: Record<string, ContentFieldComponent> = {
   text: ({ field }) => <TextField field={field as TextContentField} />,
   richtext: ({ field }) => <RichTextField field={field as RichTextContentField} />,
   boolean: ({ field }) => <BooleanField field={field as BooleanContentField} />,
@@ -52,8 +50,19 @@ export const contentFieldRegistry: Record<
   navigation_menu: ({ field }) => (
     <NavigationMenuField field={field as NavigationMenuContentField} />
   ),
+  form: ({ field }) => <FormField field={field as FormContentField} />,
 };
 
+/**
+ * Register additional CMS block types that should render as forms. Any type
+ * whose payload looks like a form (i.e. the CMS adapter normalizes it to
+ * `type: "form"`) is already routed here automatically, but explicit aliases
+ * are useful when a project always sends the same custom type name.
+ */
+
+
+
+
 export function getContentFieldComponent(type: string) {
-  return contentFieldRegistry[type as ContentFieldType];
+  return contentFieldRegistry[type];
 }

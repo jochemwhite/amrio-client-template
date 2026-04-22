@@ -35,6 +35,19 @@
   --color-footer-foreground: var(--footer-foreground);
   --color-footer-muted: var(--footer-muted);
   --color-footer-border: var(--footer-border);
+
+  --color-form-control: var(--form-control);
+  --color-form-control-muted: var(--form-control-muted);
+  --color-form-control-foreground: var(--form-control-foreground);
+  --color-form-control-placeholder: var(--form-control-placeholder);
+  --color-form-control-border: var(--form-control-border);
+  --color-form-control-border-hover: var(--form-control-border-hover);
+  --color-form-control-ring: var(--form-control-ring);
+  --color-form-label: var(--form-label);
+  --color-form-description: var(--form-description);
+  --color-form-error: var(--form-error);
+  --color-form-success: var(--form-success);
+  --color-form-accent: var(--form-accent);
 }
 
 :root {
@@ -80,6 +93,22 @@
   --hero-overlay-end: rgb(254 243 199 / 0.78);
 
   --shadow-elevated: 0 12px 30px rgb(16 32 51 / 0.06);
+
+  /* Form theme tokens — override these per template to re-skin forms
+     without touching any component code. Defaults fall back to the
+     project's base design tokens. */
+  --form-control: var(--surface);
+  --form-control-muted: var(--surface-muted);
+  --form-control-foreground: var(--foreground);
+  --form-control-placeholder: var(--muted);
+  --form-control-border: var(--border);
+  --form-control-border-hover: var(--border-strong);
+  --form-control-ring: var(--primary);
+  --form-label: var(--foreground);
+  --form-description: var(--muted);
+  --form-error: var(--danger);
+  --form-success: var(--success);
+  --form-accent: var(--accent);
 }
 
 html {

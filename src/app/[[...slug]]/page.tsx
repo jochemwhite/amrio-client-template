@@ -16,7 +16,7 @@ type CmsPageProps = {
   }>;
 };
 
-export const revalidate = 3600;
+// export const revalidate = 3600;
 
 export async function generateStaticParams() {
   const pages = await getPagesCached();
@@ -58,7 +58,7 @@ export async function generateMetadata({
 
     return {
       title: page.page.name,
-      description: `CMS page for ${page.page.name}`,
+      description: `${page.page.name} page description`,
     };
   } catch {
     return {
@@ -84,5 +84,6 @@ export default async function CmsPageRoute({ params }: CmsPageProps) {
     );
   }
 
+  // return <div>Je zou dit moeten </div>;
   return <CmsPageView page={page} />;
 }

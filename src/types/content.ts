@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import type { BuilderField } from "@/types/form-builder";
+
 export const CONTENT_FIELD_TYPES = [
   "text",
   "richtext",
@@ -12,6 +14,7 @@ export const CONTENT_FIELD_TYPES = [
   "section",
   "social_media",
   "navigation_menu",
+  "form",
 ] as const;
 
 export type ContentFieldType = (typeof CONTENT_FIELD_TYPES)[number];
@@ -147,6 +150,17 @@ export type SectionFieldContent = {
   children?: RenderableContentField[];
 };
 
+export type FormFieldContent = {
+  id: string;
+  name: string;
+  description: string | null;
+  published: boolean;
+  share_url: string;
+  content: BuilderField[];
+  submitLabel?: string;
+  successMessage?: string;
+};
+
 export type TextContentField = BaseContentField<"text", TextFieldContent>;
 export type RichTextContentField = BaseContentField<
   "richtext",
@@ -176,6 +190,7 @@ export type NavigationMenuContentField = BaseContentField<
   "navigation_menu",
   NavigationMenuFieldContent
 >;
+export type FormContentField = BaseContentField<"form", FormFieldContent>;
 
 export type KnownContentField =
   | TextContentField
@@ -188,7 +203,8 @@ export type KnownContentField =
   | VideoContentField
   | SectionContentField
   | SocialMediaContentField
-  | NavigationMenuContentField;
+  | NavigationMenuContentField
+  | FormContentField;
 
 export type UnknownContentField = BaseContentField<string, unknown>;
 
